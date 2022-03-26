@@ -1,61 +1,42 @@
-var hotels ='http://www.mocky.io/v2/5e4a7e4f2f00005d0097d253';
-var meals ='http://www.mocky.io/v2/5e4a7e282f0000490097d252';
+var hotels ='http://www.mocky.io/v2/5e4e43272f00006c0016a52b';
 $.when(
     $.getJSON(hotels ),
-    $.getJSON(meals )
-    ).done(function(datahotels, datameals) {
+    ).done(function(datahotels) {
         console.log(datahotels);
-        console.log(datameals);
-        initialPage(datahotels,datameals);
+        initialPage(datahotels);
     });
 
-function initialPage(datahotels,datameals){
+function initialPage(datahotels){
     $('#container_hotels').html('');
-    var hotelslist = datahotels[0].hotels; //get DATA
-    var mealslist = datameals[0].meal_plans; //get DATA
-    console.log(datahotels);
-    console.log(datameals);
+    var hotelslist = datahotels.hotels; //get DATA
     for (var i = 0; i < hotelslist.length; i++){
-     $('#container_hotels').append(
-        '<div id="'+hotelslist[i].code+'" class="sizehotelClass">'+
-        '<div id="header_hotel" class="flexhotelClass">'+
-            '<div id="name_hotel" class="texthotelClass hfontClass">'+hotelslist[i].name+'</div>  '+
-        '</div>'+
-    '<div id="line_sep" class="lineClass"></div>'+ 
-        '<div id="place_hotel" class="flexhotelClass">'+
-            '<div id="city_hotel" class="texthotelClass bfontClass">'+hotelslist[i].city+'</div>'+
-        '</div>'+
-        '<div id="line_sep" class="lineClass"></div>'+
-            '<div id="hotelcontainer_'+hotelslist[i].code+'" class="gridhotelClass">'+
-            '</div>'+
-    '<div id="code_hotel" class="codehotelClass">'+hotelslist[i].code+'</div>'  +
-    '</div>'
-        );
-    }
-    for (var i = 0; i < mealslist.length; i++){
-       // var mealsputlength = Object.keys(mealslist[i].hotel).length;
-        var mealsput = Object.keys(mealslist[i].hotel);
-        for (var j = 0; j < mealsput.length; j++){
 
-        for (var z = 0; z < mealslist[i].hotel[mealsput[j]].length; z++){
-            var meals =mealslist[i].hotel[mealsput[j]][z];
-            console.log(meals);
-        $('#hotelcontainer_'+mealsput[j]+'').append(
-            '<div id="room_hotel" class="roomhotelClass">'+
-            '<div id="'+meals.room+'" class="texthotelClass h2fontClass clClass">'+meals.room+'</div>'+
-            '<div id="line_sep" class="lineClass clClass"></div> '+
-           '<div id="type_room" class="texthotelClass b2fontClass ltClass clClass">'+meals.room+'</div>'+
-            '<div id="line_sep" class="linetinyClass clClass"></div>'+
-            '<div id="'+mealslist[i].code+'" class="texthotelClass b2fontClass ltClass clClass">'+mealslist[i].name+'</div>'+
-            '<div id="line_sep" class="linetinyClass clClass"></div>'+
-            '<div id="price_room" class="texthotelClass b2fontClass ltClass clClass">'+meals.price+' €</div>'+
-            '<div id="line_sep" class="linetinyClass clClass"></div>'+
-            '<div id="nights_room" class="texthotelClass b2fontClass ltClass clClass">nights_room</div>'+
-        '</div>'+
+        $('#container_hotels').append(
+           '<div id="'+hotelslist[i].code+'" class="sizehotelClass">'+
+           '<div id="header_hotel" class="flexhotelClass">'+
+               '<div id="name_hotel" class="texthotelClass hfontClass">'+hotelslist[i].name+'</div>  '+
+           '</div>'+
+       '<div id="line_sep" class="lineClass"></div>'+
+           '<div id="place_hotel" class="flexhotelClass">'+
+               '<div id="city_hotel" class="texthotelClass bfontClass">'+hotelslist[i].location+'</div>'+
+           '</div>'+
+           '<div id="line_sep" class="lineClass"></div>'+
+               '<div id="hotelcontainer_'+hotelslist[i].code+'" class="gridhotelClass">    '         +
+               '</div>'+
+       '<div id="code_hotel" class="codehotelClass">'+hotelslist[i].code+'</div>'  +
        '</div>'
            );
-        }
-        }
+       var roomslist = hotelslist[i].rooms; //get DATA
+       console.log(roomslist);
+       for (var j = 0; j < roomslist.length; j++){
+        console.log(roomslist[j]);
+           $('#hotelcontainer_'+hotelslist[i].code+'').append(
+               '<div id="room_hotel" class="roomhotelClass">'+
+               '<div id="room_name" class="texthotelClass h2fontClass clClass">'+roomslist[j].name+'</div>'+
+           '</div>'+
+          '</div>'
+              );
+           
+           }
        }
-
-}
+   }
