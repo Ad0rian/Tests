@@ -48,7 +48,7 @@ function initialPage(datahotels,datameals){
             '<div id="line_sep" class="linetinyClass clClass"></div>'+
             '<div id="'+mealslist[i].code+'" class="texthotelClass b2fontClass ltClass clClass">'+mealslist[i].name+'</div>'+
             '<div id="line_sep" class="linetinyClass clClass"></div>'+
-            '<div id="price_room" class="texthotelClass b2fontClass ltClass clClass">'+meals.price+'</div>'+
+            '<div id="price_room" class="texthotelClass b2fontClass ltClass clClass">'+meals.price+' €</div>'+
             '<div id="line_sep" class="linetinyClass clClass"></div>'+
             '<div id="nights_room" class="texthotelClass b2fontClass ltClass clClass">nights_room</div>'+
         '</div>'+
