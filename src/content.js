@@ -1,14 +1,17 @@
 var hotels ='http://www.mocky.io/v2/5e4e43272f00006c0016a52b';
+var reg ='http://www.mocky.io/v2/5e4a7dd02f0000290097d24b';
 $.when(
     $.getJSON(hotels ),
-    ).done(function(datahotels) {
+    $.getJSON(reg ),
+    ).done(function(datahotels, datareg) {
         console.log(datahotels);
-        initialPage(datahotels);
+        console.log(datareg);
+        initialPage(datahotels,datareg);
     });
 
-function initialPage(datahotels){
+function initialPage(datahotels,datareg){
     $('#container_hotels').html('');
-    var hotelslist = datahotels.hotels; //get DATA
+    var hotelslist = datahotels[0].hotels; //get DATA
     for (var i = 0; i < hotelslist.length; i++){
 
         $('#container_hotels').append(
@@ -26,17 +29,21 @@ function initialPage(datahotels){
        '<div id="code_hotel" class="codehotelClass">'+hotelslist[i].code+'</div>'  +
        '</div>'
            );
-       var roomslist = hotelslist[i].rooms; //get DATA
-       console.log(roomslist);
-       for (var j = 0; j < roomslist.length; j++){
-        console.log(roomslist[j]);
-           $('#hotelcontainer_'+hotelslist[i].code+'').append(
-               '<div id="room_hotel" class="roomhotelClass">'+
-               '<div id="room_name" class="texthotelClass h2fontClass clClass">'+roomslist[j].name+'</div>'+
+    }
+    var reglist = datareg[0].regimenes; //get DATA
+       console.log(reglist);
+       for (var i = 0; i < reglist.length; i++){
+           $('#hotelcontainer_'+reglist[i].hotel+'').append(
+            '<div id="'+reglist[i].code+'" class="roomhotelClass">'+
+               '<div id="room_name" class="texthotelClass h2fontClass clClass">'+reglist[i].name+'</div>'+
+               '<div id="line_sep" class="lineClass clClass"></div> '+
+              '<div id="type_room" class="texthotelClass b2fontClass ltClass clClass">'+reglist[i].room_type+'</div>'+
+               '<div id="line_sep" class="linetinyClass clClass"></div>'+
+               '<div id="price_room" class="texthotelClass b2fontClass ltClass clClass">'+reglist[i].price+' €</div>'+
            '</div>'+
           '</div>'
               );
            
            }
-       }
+       
    }
