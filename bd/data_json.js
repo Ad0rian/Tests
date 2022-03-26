@@ -1,5 +1,5 @@
 //JSON FILES
-var data =
+var datahotels =
 {
     "hotels": [ 
         {
